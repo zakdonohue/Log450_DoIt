@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:log450_doit/ui/utils/materialColor.dart';
 
 class ButtonIcon extends StatelessWidget {
   final String buttonText;
   final String icon;
   final Color textColor;
-  static double iconSize = 24.0;
+  final String route;
+  static const double iconSize = 24.0;
 
   const ButtonIcon(
       {super.key,
       required this.buttonText,
       required this.icon,
-      required this.textColor});
+      required this.textColor,
+      required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class ButtonIcon extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, route);
+            },
             label: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

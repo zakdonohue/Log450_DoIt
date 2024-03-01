@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:log450_doit/ui/createaccountscreen.dart';
+import 'package:log450_doit/ui/homecsreen.dart';
 import 'package:log450_doit/ui/reusableWidgets/buttonIcon.dart';
 import 'package:log450_doit/ui/utils/MaterialColor.dart';
-
-final createMaterialColor = CreateMaterialColor();
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -47,12 +47,14 @@ class LoginScreen extends StatelessWidget {
                       buttonText: "Creer un compte",
                       icon: 'assets/createaccounticon.png',
                       textColor: createMaterialColor.createMaterialColor(
-                          const Color.fromARGB(200, 255, 45, 108))),
+                          const Color.fromARGB(200, 255, 45, 108)),
+                      route: CreateAccountScreen.routeName),
                   ButtonIcon(
                       buttonText: "Se connecter",
                       icon: 'assets/loginicon.png',
                       textColor: createMaterialColor.createMaterialColor(
-                          const Color.fromARGB(200, 255, 45, 108)))
+                          const Color.fromARGB(200, 255, 45, 108)),
+                      route: HomeScreen.routeName),
                 ]))
           ],
         ),
@@ -60,3 +62,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+final createMaterialColor = CreateMaterialColor();
