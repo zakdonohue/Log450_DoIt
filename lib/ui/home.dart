@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: createMaterialColor
-          .createMaterialColor(Color.fromARGB(200, 97, 115, 160)),
+          .createMaterialColor(const Color.fromARGB(200, 97, 115, 160)),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -20,31 +20,40 @@ class LoginScreen extends StatelessWidget {
               child: Image.asset('assets/doit.webp'),
             ),
             const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "Entrez le nom d'identifiant"),
-              ),
+              padding: EdgeInsets.only(top: 70.0),
+              child: Column(children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Entrez le nom d'identifiant"),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Entrez le mot de passe"),
+                  ),
+                )
+              ]),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "Entrez le mot de passe"),
-              ),
-            ),
-            ElevatedButton.icon(
-                onPressed: () {},
-                label: Align(
-                    alignment: Alignment.centerLeft, child: new Text("yo")),
-                icon: Image.asset('assets/createaccounticon.png')),
-            ElevatedButton.icon(
-                onPressed: () {},
-                label: Align(
-                    alignment: Alignment.centerLeft, child: new Text("bla")),
-                icon: Image.asset('assets/createaccounticon.png'))
+            Padding(
+                padding: const EdgeInsets.only(top: 180.0),
+                child: Column(children: [
+                  ButtonIcon(
+                      buttonText: "Creer un compte",
+                      icon: 'assets/createaccounticon.png',
+                      textColor: createMaterialColor.createMaterialColor(
+                          const Color.fromARGB(200, 255, 45, 108))),
+                  ButtonIcon(
+                      buttonText: "Se connecter",
+                      icon: 'assets/loginicon.png',
+                      textColor: createMaterialColor.createMaterialColor(
+                          const Color.fromARGB(200, 255, 45, 108)))
+                ]))
           ],
         ),
       ),
