@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
+import 'package:lottie/lottie.dart';
 
 class LoaderScreen extends StatelessWidget {
   const LoaderScreen({super.key});
@@ -11,7 +12,8 @@ class LoaderScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(199, 97, 160, 111)),
-        body: const Text("Loader Screen"));
+        //TODO change for right animation
+        body: Center(child: Lottie.asset('assets/LoaderTask.json')));
   }
 }
 
