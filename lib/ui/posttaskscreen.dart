@@ -11,7 +11,7 @@ class PostTaskScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(199, 97, 160, 111)),
-        body: const Text("Post Task Screen"));
+        body: const Text("Post Photo Task Screen"));
   }
 }
 

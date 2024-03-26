@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 
-class ManageFriendsScreen extends StatelessWidget {
-  const ManageFriendsScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
-  static const routeName = '/managefriends';
+  static const routeName = '/profile';
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(198, 163, 33, 104)),
+            .createMaterialColor(Color.fromARGB(197, 17, 167, 122)),
         body: Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
             child: Center(
               child: Text(
-                'Friends page',
+                'Profile page',
                 style: theme.textTheme.titleLarge,
               ),
             ),

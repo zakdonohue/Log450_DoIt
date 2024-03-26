@@ -25,10 +25,11 @@ class ButtonIcon extends StatelessWidget {
               Navigator.pushNamed(context, route);
             },
             label: Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Text(
                   buttonText,
-                  style: TextStyle(color: textColor),
+                  style:
+                      TextStyle(color: textColor, fontWeight: FontWeight.bold),
                 )),
             icon: Image.asset(icon, width: iconSize, height: iconSize)),
       )

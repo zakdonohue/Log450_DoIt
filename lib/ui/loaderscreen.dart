@@ -12,7 +12,6 @@ class LoaderScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(199, 97, 160, 111)),
-        //TODO change for right animation
         body: Center(child: Lottie.asset('assets/LoaderTask.json')));
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/createaccountscreen.dart';
-import 'package:log450_doit/ui/homecsreen.dart';
-import 'package:log450_doit/ui/loaderscreen.dart';
+import 'package:log450_doit/ui/corenav.dart';
 import 'package:log450_doit/ui/reusableWidgets/buttonIcon.dart';
+import 'package:log450_doit/ui/reusableWidgets/customtextfield.dart';
 import 'package:log450_doit/ui/utils/MaterialColor.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,8 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: createMaterialColor
-          .createMaterialColor(const Color.fromARGB(200, 97, 115, 160)),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: <Widget>[
@@ -22,41 +21,55 @@ class LoginScreen extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(top: 70.0),
-              child: Column(children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Entrez le nom d'identifiant"),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Entrez le mot de passe"),
-                  ),
-                )
-              ]),
+              child: Column(children: []),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 180.0),
-                child: Column(children: [
-                  ButtonIcon(
-                      buttonText: "Creer un compte",
-                      icon: 'assets/createaccounticon.png',
-                      textColor: createMaterialColor.createMaterialColor(
-                          const Color.fromARGB(200, 255, 45, 108)),
-                      route: LoaderScreen.routeName),
-                  ButtonIcon(
-                      buttonText: "Se connecter",
-                      icon: 'assets/loginicon.png',
-                      textColor: createMaterialColor.createMaterialColor(
-                          const Color.fromARGB(200, 255, 45, 108)),
-                      route: HomeScreen.routeName),
-                ]))
+            Expanded(
+                child: Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                        color: createMaterialColor.createMaterialColor(
+                            const Color.fromARGB(200, 97, 115, 160)),
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20.0))),
+                    child: Column(children: <Widget>[
+                      const Padding(
+                          padding: const EdgeInsets.only(top: 80.0),
+                          child: Column(children: [
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 32.0,
+                                ),
+                                child: CustomTextField(
+                                    hintText: "Entrez le nom d'identifiant")),
+                            Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 32.0,
+                                ),
+                                child: CustomTextField(
+                                    hintText: "Entrez le mot de passe"))
+                          ])),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              top: 100.0, right: 50.0, left: 50.0),
+                          child: Column(children: [
+                            ButtonIcon(
+                                buttonText: "Creer un compte",
+                                icon: 'assets/createaccounticon.png',
+                                textColor: createMaterialColor
+                                    .createMaterialColor(const Color.fromARGB(
+                                        200, 255, 45, 108)),
+                                route: CreateAccountScreen.routeName),
+                            ButtonIcon(
+                                buttonText: "Se connecter",
+                                icon: 'assets/loginicon.png',
+                                textColor: createMaterialColor
+                                    .createMaterialColor(const Color.fromARGB(
+                                        200, 255, 45, 108)),
+                                route: CoreApp.routeName),
+                          ]))
+                    ]))),
           ],
         ),
       ),

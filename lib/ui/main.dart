@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:log450_doit/homescreen.dart';
 import 'package:log450_doit/ui/createtaskscreen.dart';
 import 'package:log450_doit/ui/loaderscreen.dart';
 import 'package:log450_doit/ui/managefriends.dart';
-import 'package:log450_doit/ui/parametersscreen.dart';
+import 'package:log450_doit/ui/settingsscreen.dart';
 import 'package:log450_doit/ui/posttaskscreen.dart';
-import 'package:log450_doit/ui/profile.dart';
+import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/createaccountscreen.dart';
-import 'package:log450_doit/ui/homecsreen.dart';
+import 'package:log450_doit/ui/corenav.dart';
 import 'package:log450_doit/ui/loginscreen.dart';
 
 void main() {
@@ -20,13 +21,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(routes: {
       CreateAccountScreen.routeName: (context) => const CreateAccountScreen(),
-      HomeScreen.routeName: (context) => const HomeScreen(),
+      CoreApp.routeName: (context) => const CoreAppNavigation(),
       ProfileScreen.routeName: (context) => const ProfileScreen(),
       CreateTaskScreen.routeName: (context) => const CreateTaskScreen(),
       PostTaskScreen.routeName: (context) => const PostTaskScreen(),
       ManageFriendsScreen.routeName: (context) => const ManageFriendsScreen(),
-      ParametersScreen.routeName: (context) => const ParametersScreen(),
-      LoaderScreen.routeName: (context) => const LoaderScreen()
+      SettingsScreen.routeName: (context) => const SettingsScreen(),
+      LoaderScreen.routeName: (context) => const LoaderScreen(),
+      HomeScreen.routeName: (context) => const HomeScreen()
     }, title: "Do It", home: const LoginScreen());
   }
 }

@@ -8,10 +8,22 @@ class CreateTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(199, 97, 160, 111)),
-        body: const Text("Create Task Screen"));
+            .createMaterialColor(const Color.fromARGB(198, 167, 107, 17)),
+        body: Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Task page',
+                style: theme.textTheme.titleLarge,
+              ),
+            ),
+          ),
+        ));
   }
 }
 
