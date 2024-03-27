@@ -23,3 +23,7 @@ flutter:
      - assets/createaccounticon.png
      - assets/loginicon.png
      - assets/LoaderTask.json
+     - assets/partyimage.jpg
+     - assets/paddleboard.jpg
+     - assets/amusementpark.jpg
+     - assets/meeting.jpg

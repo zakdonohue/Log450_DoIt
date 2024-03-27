@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:log450_doit/ui/reusableWidgets/searchBar.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 
 class ManageFriendsScreen extends StatelessWidget {
@@ -12,17 +13,13 @@ class ManageFriendsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(198, 163, 33, 104)),
-        body: Card(
+        body: const Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Friends page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
+          child: Column(children: [
+            CustomSearchBar(),
+            // SizedBox.expand(child: Column(children: []))
+          ]),
         ));
   }
 }

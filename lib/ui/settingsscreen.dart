@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/reusableWidgets/customswitch.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
@@ -15,42 +13,69 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(199, 97, 160, 111)),
-        body: Card(
-            shadowColor: Colors.transparent,
-            margin: const EdgeInsets.all(8.0),
-            child: SizedBox.expand(
-                child: Center(
-              child: Column(children: [
-                Text(
-                  'Settings page',
-                  style: theme.textTheme.titleLarge,
-                ),
-                const Row(children: [Text("Profile Prive"), CustomSwitch()]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(color: Colors.black),
-                ),
-                const Row(children: [Text("Theme Fonce"), CustomSwitch()]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(color: Colors.black),
-                ),
-                const Row(
-                    children: [Text("Rappel automatique"), CustomSwitch()]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(color: Colors.black),
-                ),
-                const Row(
-                    children: [Text("Tutoriel personalise"), CustomSwitch()]),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(color: Colors.black),
-                ),
-              ]),
-            ))));
+            .createMaterialColor(Color.fromARGB(198, 78, 97, 161)),
+        body: Center(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 40.0),
+          child: Column(children: [
+            Text('Settings page', style: theme.textTheme.titleLarge),
+            const Card(
+                shadowColor: Colors.transparent,
+                margin: EdgeInsets.all(8.0),
+                child: Wrap(children: [
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(children: [
+                        Row(children: [
+                          Text("Profile Prive"),
+                          Spacer(),
+                          CustomSwitch()
+                        ]),
+                        Divider(color: Colors.black),
+                        Row(children: [
+                          Text("Theme Fonce"),
+                          Spacer(),
+                          CustomSwitch()
+                        ]),
+                        Divider(color: Colors.black),
+                        Row(children: [
+                          Text("Rappel automatique"),
+                          Spacer(),
+                          CustomSwitch()
+                        ]),
+                        Divider(color: Colors.black),
+                        Row(children: [
+                          Text("Tutoriel personalise"),
+                          Spacer(),
+                          CustomSwitch()
+                        ]),
+                        Divider(color: Colors.black),
+                      ]),
+                    ),
+                  )
+                ]))
+          ]),
+        )));
   }
 }
 
 final createMaterialColor = CreateMaterialColor();
+
+//TODO implement dark theme
+    // final ThemeData themeData = ThemeData(
+    //     useMaterial3: true,
+    //     brightness: isDark ? Brightness.dark : Brightness.light);
+    //  Tooltip(
+    //         message: 'Change brightness mode',
+    //         child: IconButton(
+    //           isSelected: isDark,
+    //           onPressed: () {
+    //             setState(() {
+    //               isDark = !isDark;
+    //             });
+    //           },
+    //           icon: const Icon(Icons.wb_sunny_outlined),
+    //           selectedIcon: const Icon(Icons.brightness_2_outlined),
+    //         ),
+    //       )

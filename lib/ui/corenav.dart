@@ -5,7 +5,6 @@ import 'package:log450_doit/ui/managefriends.dart';
 import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/settingsscreen.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
-import 'package:log450_doit/ui/reusableWidgets/buttonIcon.dart';
 
 class CoreApp extends State<CoreAppNavigation> {
   static const routeName = '/corenav';
