@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   lottie: ^3.1.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +28,7 @@ flutter:
      - assets/paddleboard.jpg
      - assets/amusementpark.jpg
      - assets/meeting.jpg
+     - assets/male1.png
+     - assets/male2.png
+     - assets/female1.png
+     - assets/female2.png
