@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const userController = require('./controllers/userController');
 const userSettingsController = require("./controllers/settingController");
 const userTasksController = require("./controllers/taskController");
-const userActualityController = require("./controllers/actualityController");
 const friendsController = require("./controllers/friendController");
 const reminderController = require("./controllers/reminderController");
 
@@ -37,12 +36,6 @@ router.post('/users/:userId/tasks', userTasksController.addTask);
 router.get('/users/:userId/tasks', userTasksController.getTasks);
 router.patch('/users/:userId/tasks/:taskId', userTasksController.updateTask);
 router.delete('/users/:userId/tasks/:taskId', userTasksController.deleteTask);
-
-// UserActuality Routes
-router.post('/users/:userId/actualities', userActualityController.addActuality);
-router.get('/users/:userId/actualities', userActualityController.getActualities);
-router.patch('/users/:userId/actualities/:actualityId', userActualityController.updateActuality);
-router.delete('/users/:userId/actualities/:actualityId', userActualityController.deleteActuality);
 
 // Friend Routes
 router.post('/users/:userId/friends', friendsController.addFriend);

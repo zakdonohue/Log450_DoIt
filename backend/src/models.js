@@ -19,13 +19,6 @@ const taskSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-// Actuality Schema
-const actualitySchema = new Schema({
-  content: String,
-  published_date: Date,
-  created_at: { type: Date, default: Date.now },
-});
-
 // User Schema
 const userSchema = new Schema({
   username: { type: String, required: true },
@@ -35,7 +28,6 @@ const userSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
   settings: settingsSchema, // Use settings schema here
   tasks: [taskSchema], // Use task schema here for an array of tasks
-  actualities: [actualitySchema], // Use actuality schema here for an array of actualities
   friend_ids: [{ type: Schema.Types.ObjectId, ref: 'Friend' }],
   reminder_ids: [{ type: Schema.Types.ObjectId, ref: 'Reminder' }],
 });
