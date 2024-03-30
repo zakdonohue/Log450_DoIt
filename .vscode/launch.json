@@ -7,7 +7,8 @@
         {
             "name": "log450_doit",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/ui/main.dart"
         },
         {
             "name": "log450_doit (profile mode)",
