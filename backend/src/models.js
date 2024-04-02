@@ -12,9 +12,8 @@ const settingsSchema = new Schema({
 // Task Schema
 const taskSchema = new Schema({
   title: String,
-  description: String,
   due_date: Date,
-  status: String,
+  isDone: Boolean,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
