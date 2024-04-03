@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(Color.fromARGB(197, 17, 167, 122)),
+            .createMaterialColor(const Color.fromARGB(197, 17, 167, 122)),
         body: Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),

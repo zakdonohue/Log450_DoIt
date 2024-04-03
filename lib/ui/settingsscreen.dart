@@ -13,7 +13,7 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(Color.fromARGB(198, 78, 97, 161)),
+            .createMaterialColor(const Color.fromARGB(198, 78, 97, 161)),
         body: Center(
             child: Padding(
           padding: const EdgeInsets.only(top: 40.0),

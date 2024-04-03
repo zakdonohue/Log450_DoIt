@@ -30,10 +30,10 @@ class LoginScreen extends StatelessWidget {
                         color: createMaterialColor.createMaterialColor(
                             const Color.fromARGB(200, 97, 115, 160)),
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20.0))),
+                            const BorderRadius.vertical(top: Radius.circular(20.0))),
                     child: Column(children: <Widget>[
                       const Padding(
-                          padding: const EdgeInsets.only(top: 80.0),
+                          padding: EdgeInsets.only(top: 80.0),
                           child: Column(children: [
                             Padding(
                                 padding: EdgeInsets.symmetric(

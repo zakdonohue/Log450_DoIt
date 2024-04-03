@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class FriendItem extends StatelessWidget {
   final String imagePath;

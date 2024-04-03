@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
       CreateAccountScreen.routeName: (context) => const CreateAccountScreen(),
       CoreApp.routeName: (context) => const CoreAppNavigation(),
       ProfileScreen.routeName: (context) => const ProfileScreen(),
-      CreateTaskScreen.routeName: (context) => CreateTaskScreen(),
+      CreateTaskScreen.routeName: (context) => const CreateTaskScreen(),
       PostTaskScreen.routeName: (context) => const PostTaskScreen(),
       ManageFriendsScreen.routeName: (context) => const ManageFriendsScreen(),
       SettingsScreen.routeName: (context) => const SettingsScreen(),

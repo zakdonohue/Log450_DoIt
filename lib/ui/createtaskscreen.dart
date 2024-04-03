@@ -6,12 +6,14 @@ import 'dart:convert';
 
 class CreateTaskScreen extends StatefulWidget {
   static String routeName = '/createTaskScreen';
+
+  const CreateTaskScreen({super.key});
   @override
   _CreateTaskScreenState createState() => _CreateTaskScreenState();
 }
 
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
-  DateTime selectedDate = DateTime.now().add(Duration(days: -1));
+  DateTime selectedDate = DateTime.now().add(const Duration(days: -1));
   TimeOfDay selectedTime = TimeOfDay.now();
   final TextEditingController _taskController = TextEditingController();
   int selectedIndex = 0;
@@ -54,7 +56,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       backgroundColor: Colors.deepPurple,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text(
+        title: const Text(
           'Create \nNew Task',
           style: TextStyle(
               color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
@@ -68,7 +70,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       body: Padding(
         padding: const EdgeInsets.only(top: 0),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -83,7 +85,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   controller: _taskController,
                   decoration: InputDecoration(
                     labelText: '       Enter your task.',
-                    labelStyle: TextStyle(fontSize: 18.0),
+                    labelStyle: const TextStyle(fontSize: 18.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -91,9 +93,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               // Scrollable Dates
-              Container(
+              SizedBox(
                 height: 60,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -113,8 +115,15 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                         });
                       },
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        padding: EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(30.0),
+                          color: isSelected
+                              ? Colors.grey.shade600
+                              : const Color.fromARGB(255, 214, 213, 213),
+                        ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -122,32 +131,25 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                               Container(
                                 height: 6.0,
                                 width: 6.0,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.red,
                                 ),
-                                margin: EdgeInsets.only(bottom: 4.0),
+                                margin: const EdgeInsets.only(bottom: 4.0),
                               ),
                             if (!isToday)
                               Container(
                                 height: 6.0,
                                 width: 6.0,
-                                margin: EdgeInsets.only(bottom: 4.0),
+                                margin: const EdgeInsets.only(bottom: 4.0),
                               ),
                             Text(
                               DateFormat('dd MMM').format(date),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                               ),
                             ),
                           ],
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(30.0),
-                          color: isSelected
-                              ? Colors.grey.shade600
-                              : Color.fromARGB(255, 214, 213, 213),
                         ),
                       ),
                     );
@@ -163,27 +165,28 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                       context: context,
                       initialTime: selectedTime,
                     );
-                    if (picked != null && picked != selectedTime)
+                    if (picked != null && picked != selectedTime) {
                       setState(() {
                         selectedTime = picked;
                       });
+                    }
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: Text('Select Time: ${selectedTime.format(context)}'),
                     alignment: Alignment.center,
+                    child: Text('Select Time: ${selectedTime.format(context)}'),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               // Search bar
-              Divider(
+              const Divider(
                 color: Colors.grey,
                 thickness: 1,
                 indent: 30,
@@ -198,17 +201,17 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     hintText: 'Search hashtag',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontSize: 18.0,
                     ),
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                   ),
                   onSubmitted: (value) {
                     // searchHashtag(value);
                   },
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               // Hashtags
               Wrap(
                 spacing: 8.0,
@@ -222,7 +225,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   },
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -241,15 +244,15 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             });
           }
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.save,
           color: Colors.white,
           size: 30,
         ),
         label:
-            Text('Save', style: TextStyle(color: Colors.white, fontSize: 25)),
+            const Text('Save', style: TextStyle(color: Colors.white, fontSize: 25)),
         backgroundColor: Colors.deepPurple,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(40.0)),
         ),
       ),

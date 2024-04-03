@@ -27,7 +27,7 @@ class _SearchBarState extends State<CustomSearchBar> {
             controller.openView();
           },
           leading: const Icon(Icons.search),
-          trailing: <Widget>[],
+          trailing: const <Widget>[],
         ),
       );
     }, suggestionsBuilder: (BuildContext context, SearchController controller) {

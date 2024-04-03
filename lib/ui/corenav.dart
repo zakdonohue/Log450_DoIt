@@ -54,7 +54,7 @@ class CoreApp extends State<CoreAppNavigation> {
         /// Home page
         const HomeScreen(),
         const ProfileScreen(),
-        CreateTaskScreen(),
+        const CreateTaskScreen(),
         const ManageFriendsScreen(),
         const SettingsScreen(),
       ][currentPageIndex],
