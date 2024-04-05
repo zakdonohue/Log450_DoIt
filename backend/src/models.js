@@ -23,6 +23,11 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password_hash: { type: String, required: true },
+  surname: String,
+  lastName: String,
+  city: String ?,
+  province: String ?,
+  country: String ?,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   settings: settingsSchema, // Use settings schema here

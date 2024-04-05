@@ -29,21 +29,21 @@ class LoginScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: createMaterialColor.createMaterialColor(
                             const Color.fromARGB(200, 97, 115, 160)),
-                        borderRadius:
-                            const BorderRadius.vertical(top: Radius.circular(20.0))),
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(20.0))),
                     child: Column(children: <Widget>[
-                      const Padding(
-                          padding: EdgeInsets.only(top: 80.0),
+                      Padding(
+                          padding: const EdgeInsets.only(top: 80.0),
                           child: Column(children: [
                             Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 8.0,
                                   horizontal: 32.0,
                                 ),
                                 child: CustomTextField(
                                     hintText: "Entrez le nom d'identifiant")),
                             Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 8.0,
                                   horizontal: 32.0,
                                 ),

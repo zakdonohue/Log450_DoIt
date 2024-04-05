@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String hintText;
-  const CustomTextField({super.key, required this.hintText});
+  final TextEditingController? controller;
+
+  const CustomTextField({super.key, required this.hintText, this.controller});
+  @override
+  State<CustomTextField> createState() => _CustomTextField();
+}
+
+class _CustomTextField extends State<CustomTextField> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +22,7 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         TextField(
+          controller: widget.controller,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.white, width: 2.0),
@@ -18,7 +30,7 @@ class CustomTextField extends StatelessWidget {
             ),
             filled: true,
             hintStyle: TextStyle(color: Colors.grey[800]),
-            hintText: hintText,
+            hintText: widget.hintText,
             fillColor: Colors.white70,
           ),
         )
