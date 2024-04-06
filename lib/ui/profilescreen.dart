@@ -97,9 +97,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   task['isDone'] == true ? Icons.check : Icons.camera_alt, 
                                   color: Colors.white
                                   ),
-                                onPressed: () {
+                                onPressed: () async {
                                   print(task.toString());
-                                  openCameraAndSavePhoto(SharedPreferences.shared.userId, task["_id"]);
+                                  await openCameraAndSavePhoto(SharedPreferences.shared.userId, task["_id"]);
+                                  await _fetchUserTasks();
                                 },
                               ),
                             ),
