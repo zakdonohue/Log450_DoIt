@@ -36,13 +36,14 @@ class SettingsScreen extends StatelessWidget {
                           Text("Profile Prive"),
                           Spacer(),
                           CustomSwitchPrivacy(callbackON: () {
-                            _EditPrivacy(
-                              true,
-                              false,
-                              "6610b7fb661864dc02c472e7",
-                            );
+                            // _EditSettings(
+                            //   true,
+                            //   false,
+                            //   "6610b7fb661864dc02c472e7",
+                            // );
+                            _GetSettings("6610b7fb661864dc02c472e7");
                           }, callbackOFF: () {
-                            _EditPrivacy(
+                            _EditSettings(
                               false,
                               false,
                               "6610b7fb661864dc02c472e7",
@@ -64,10 +65,10 @@ class SettingsScreen extends StatelessWidget {
                           Text("Rappel automatique"),
                           Spacer(),
                           CustomSwitchPrivacy(callbackON: () {
-                            _EditPrivacy(
+                            _EditSettings(
                                 false, true, "6610b7fb661864dc02c472e7");
                           }, callbackOFF: () {
-                            _EditPrivacy(
+                            _EditSettings(
                               false,
                               false,
                               "6610b7fb661864dc02c472e7",
@@ -84,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-Future<void> _EditPrivacy(
+Future<void> _EditSettings(
     bool? isAccountPrivate, bool? isNotifEnabled, String userId) async {
   String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";
 
@@ -100,6 +101,27 @@ Future<void> _EditPrivacy(
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       print("Settings updated successfully");
+    } else {
+      print("Failed to update settings: ${response.body}");
+    }
+  } catch (e) {
+    print("Error update settings: $e");
+  }
+}
+
+Future<void> _GetSettings(String userId) async {
+  String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";
+
+  try {
+    final response = await http
+        .get(Uri.parse(apiUrl), headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      print("Settings updated successfully");
+      final parsedJson = jsonDecode(response.body);
+      print('${parsedJson.runtimeType} : $parsedJson');
+      print(parsedJson["is_account_private"]);
+      print(parsedJson["notifications_enabled"]);
     } else {
       print("Failed to update settings: ${response.body}");
     }
