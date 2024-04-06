@@ -9,6 +9,7 @@ import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+  static const routeName = '/login';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -92,8 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextField(
                             controller: _usernameController,
                             decoration: InputDecoration(
-                              hintText: "Enter your username",
-                              labelText: "Username",
+                              hintText: "Entrez votre nom d'utilisateur",
+                              labelText: "Nom d'utilisateur",
                               labelStyle: const TextStyle(color: Colors.white),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0), 
@@ -120,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
-                              hintText: "Enter your password",
-                              labelText: "Password",
+                              hintText: "Entrez votre mot de passe",
+                              labelText: "Mot de passe",
                               labelStyle: const TextStyle(color: Colors.white),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0),

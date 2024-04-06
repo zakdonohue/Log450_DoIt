@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/corenav.dart';
+import 'package:log450_doit/ui/loginscreen.dart';
 import 'package:log450_doit/ui/reusableWidgets/customtextfield.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 import 'package:log450_doit/ui/reusableWidgets/buttonIcon.dart';
@@ -61,7 +62,7 @@ Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor: Colors.white,
     body: Padding(
-      padding: const EdgeInsets.only(top: 140.0),
+      padding: const EdgeInsets.only(top: 120.0),
       child: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -91,13 +92,17 @@ Widget build(BuildContext context) {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Informations personnelles",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                        const Center(
+                          child: Text(
+                            "Créer un compte",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 42,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
+                        const SizedBox(height: 20),
                         CustomTextField(
                           hintText: "Prenom",
                           controller: controllerSurname,
@@ -129,16 +134,17 @@ Widget build(BuildContext context) {
                         const Text(
                           "Informations de connexion",
                           style: TextStyle(
-                            color: Color.fromARGB(199, 2, 14, 43),
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        const SizedBox(height: 10),
                         CustomTextField(
                           hintText: "Email",
                           controller: controllerEmail,
                         ),
                         CustomTextField(
-                          hintText: "Nom d'identifiant",
+                          hintText: "Nom d'utilisateur",
                           controller: controllerUsername,
                         ),
                         CustomTextField(
@@ -156,37 +162,50 @@ Widget build(BuildContext context) {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                _CreateUser(
-                                  controllerUsername,
-                                  controllerPassword,
-                                  controllerEmail,
-                                  controllerSurname,
-                                  controllerLastName,
-                                  controllerCity,
-                                  controllerProvince,
-                                  controllerCountry,
-                                );
-                                Navigator.pushNamed(context, CoreApp.routeName);
-                              },
-                              label: const Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Creer le compte",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(200, 255, 45, 108),
-                                    fontWeight: FontWeight.bold,
+                            child: SizedBox(
+                              height: 60,
+                              width: 300,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  _CreateUser(
+                                    controllerUsername,
+                                    controllerPassword,
+                                    controllerEmail,
+                                    controllerSurname,
+                                    controllerLastName,
+                                    controllerCity,
+                                    controllerProvince,
+                                    controllerCountry,
+                                  );
+                                },
+                                label: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Créer le compte",
+                                    style: TextStyle(
+                                      color: Color(0xFF0AAAF8),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              icon: Image.asset(
-                                'assets/loginicon.png',
-                                width: 24.0,
-                                height: 24.0,
+                                icon: Image.asset(
+                                  'assets/loginicon.png',
+                                  width: 24.0,
+                                  height: 24.0,
+                                  color:Color(0xFF0AAAF8),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  elevation: 5, // Add elevation (drop shadow) to the button
+                                  shadowColor: Colors.black.withOpacity(0.8), // Shadow color
+                                ),
                               ),
                             ),
                           ),
+                          const SizedBox(height: 34),
                         ],
                       ),
                     ),
@@ -236,7 +255,14 @@ Future<void> _CreateUser(
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       print("User created successfully");
+      Navigator.pushNamed(context, LoginScreen.routeName);
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Il y a eu une erreur lors de la création de compte."),
+          duration: Duration(seconds: 3),
+        ),
+      );
       print("Failed to create user: ${response.body}");
     }
   } catch (e) {
