@@ -20,6 +20,21 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const authenticateUser = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password_hash;
+  
+  try {
+    const user = await User.findOne({ username: username, password_hash: password });
+    if (!user) {
+      return res.status(401).send({ error: 'Invalid credentials' });
+    }
+    res.send({ userId: user._id });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -58,6 +73,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   createUser,
+  authenticateUser,
   getAllUsers,
   getUserById,
   updateUser,

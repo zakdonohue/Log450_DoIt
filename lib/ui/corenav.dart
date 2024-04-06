@@ -66,51 +66,62 @@ class CoreApp extends State<CoreAppNavigation> {
       GetUserTasksNotCompleted("660b4acda50307da74558e81");
     }
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 6.0,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _buildNavItem(Icons.home_outlined, "Actualité", 0),
+            _buildNavItem(Icons.task_outlined, "Taches", 1),
+            SizedBox(width: 48),
+            _buildNavItem(Icons.people_alt_outlined, "Amis", 2),
+            _buildNavItem(Icons.settings_outlined, "Réglages", 3),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const CreateTaskScreen(),
+            ),
+          );
         },
-        indicatorColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(200, 97, 115, 160)),
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Accueil',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outlined),
-            label: 'Profil',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.task),
-            icon: Icon(Icons.task_outlined),
-            label: 'Taches',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.people_alt),
-            icon: Icon(Icons.people_alt_outlined),
-            label: 'Amis',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.settings),
-            icon: Icon(Icons.settings_outlined),
-            label: 'Parametres',
-          ),
+        child: const Icon(Icons.add),
+        backgroundColor: Color(0xFF0AAAF8),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: IndexedStack(
+        index: currentPageIndex,
+        children: const <Widget>[
+          HomeScreen(),
+          ProfileScreen(),
+          ManageFriendsScreen(),
+          SettingsScreen(),
         ],
       ),
-      body: <Widget>[
-        /// Home page
-        const HomeScreen(),
-        const ProfileScreen(),
-        const CreateTaskScreen(),
-        const ManageFriendsScreen(),
-        const SettingsScreen(),
-      ][currentPageIndex],
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    Color iconColor = currentPageIndex == index
+        ? Colors.blue
+        : Colors.grey; // Adjust colors as needed
+    return InkWell(
+      onTap: () {
+        setState(() {
+          currentPageIndex = index;
+        });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(icon, color: iconColor),
+          Text(label, style: TextStyle(color: iconColor))
+        ],
+      ),
     );
   }
 }

@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 //UserProfile Routes
 router.post('/users', userController.createUser);
+router.post('/users/auth', userController.authenticateUser);
 router.get('/users', userController.getAllUsers);
 router.get('/users/:id', userController.getUserById);
 router.patch('/users/:id', userController.updateUser);
