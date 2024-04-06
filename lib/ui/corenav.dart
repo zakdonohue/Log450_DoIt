@@ -6,16 +6,65 @@ import 'package:log450_doit/ui/createtaskscreen.dart';
 import 'package:log450_doit/ui/managefriends.dart';
 import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/settingsscreen.dart';
+import 'package:log450_doit/ui/utils/localnotifservice.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
+
+class CoreAppNavigation extends StatefulWidget {
+  const CoreAppNavigation({super.key});
+
+  @override
+  State<CoreAppNavigation> createState() => CoreApp();
+  static CoreApp of(BuildContext context) =>
+      context.findAncestorStateOfType<CoreApp>()!;
+}
 
 class CoreApp extends State<CoreAppNavigation> {
   static const routeName = '/corenav';
   int currentPageIndex = 0;
 
+  Future<void> GetUserTasksNotCompleted(String userId) async {
+    String apiUrl = "http://10.0.2.2:3000/users/$userId";
+    int numberofTaskNotCompleted = 0;
+    try {
+      final response = await http.get(Uri.parse(apiUrl),
+          headers: {"Content-Type": "application/json"});
+
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        print("get user successfully");
+        final parsedJson = jsonDecode(response.body);
+        List<dynamic> listTask = parsedJson["tasks"];
+
+        for (var i = 0; i < listTask.length; i++) {
+          if (!listTask[i]["isDone"]) {
+            numberofTaskNotCompleted += 1;
+          }
+        }
+
+        if (numberofTaskNotCompleted > 0) {
+          LocalNotificationService.showNotificationAndroid(
+              numberofTaskNotCompleted);
+        }
+      } else {
+        print("Failed to get user: ${response.body}");
+      }
+    } catch (e) {
+      print("Error get user: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    LocalNotificationService().init();
+  }
+
   @override
   Widget build(BuildContext context) {
     _GetSettings("6610b7fb661864dc02c472e7");
+    if (SharedPreferences.shared.isNotificationEnabled) {
+      GetUserTasksNotCompleted("660b4acda50307da74558e81");
+    }
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -66,16 +115,7 @@ class CoreApp extends State<CoreAppNavigation> {
   }
 }
 
-//}
-
 final createMaterialColor = CreateMaterialColor();
-
-class CoreAppNavigation extends StatefulWidget {
-  const CoreAppNavigation({super.key});
-
-  @override
-  State<CoreAppNavigation> createState() => CoreApp();
-}
 
 Future<void> _GetSettings(String userId) async {
   String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";

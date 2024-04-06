@@ -20,8 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    LocalNotificationService().init();
-    LocalNotificationService.showNotificationAndroid("title", "value");
     String currentUserId = '';
     _getTasksOfFriends(currentUserId);
   }

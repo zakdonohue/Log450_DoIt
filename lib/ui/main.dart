@@ -9,7 +9,6 @@ import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/createaccountscreen.dart';
 import 'package:log450_doit/ui/corenav.dart';
 import 'package:log450_doit/ui/loginscreen.dart';
-import 'package:log450_doit/ui/utils/localnotifservice.dart';
 
 void main() {
   runApp(const MainApp());
