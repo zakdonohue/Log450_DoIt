@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:log450_doit/homescreen.dart';
+import 'package:log450_doit/ui/corenav.dart';
 import 'package:log450_doit/ui/createaccountscreen.dart';
 import 'package:log450_doit/ui/utils/MaterialColor.dart';
 import 'package:http/http.dart' as http;
@@ -223,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
             final responseBody = jsonDecode(response.body);
             final userId = responseBody['userId'];
             SharedPreferences.shared.userId = userId;
-            Navigator.pushNamed(context, HomeScreen.routeName);
+            Navigator.pushNamed(context, CoreApp.routeName);
 
             print("User authenticated successfully. UserId: $userId");
           } else if (response.statusCode == 401) {
