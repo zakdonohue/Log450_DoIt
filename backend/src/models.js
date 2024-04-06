@@ -13,6 +13,7 @@ const taskSchema = new Schema({
   title: String,
   due_date: Date,
   isDone: Boolean,
+  image: Buffer,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });

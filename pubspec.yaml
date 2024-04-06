@@ -13,6 +13,9 @@ dependencies:
   fluttertoast: ^8.2.4
   http: ^1.2.0
   flutter_local_notifications: ^17.0.0
+  image_picker: ^1.0.7
+  path_provider: ^2.1.2
+  permission_handler: ^11.3.1
 
   intl: any
 dev_dependencies:

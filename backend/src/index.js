@@ -7,6 +7,8 @@ const userSettingsController = require("./controllers/settingController");
 const userTasksController = require("./controllers/taskController");
 const friendsController = require("./controllers/friendController");
 const reminderController = require("./controllers/reminderController");
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const router = express();
 const port = 3000;
@@ -35,7 +37,7 @@ router.delete('/users/:userId/settings', userSettingsController.deleteUserSettin
 // UserTasks Routes
 router.post('/users/:userId/tasks', userTasksController.addTask);
 router.get('/users/:userId/tasks', userTasksController.getTasks);
-router.patch('/users/:userId/tasks/:taskId', userTasksController.updateTask);
+router.post('/users/:userId/tasks/:taskId', upload.single('image'), userTasksController.updateTask);
 router.delete('/users/:userId/tasks/:taskId', userTasksController.deleteTask);
 
 // Friend Routes

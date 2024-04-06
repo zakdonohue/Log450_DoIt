@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const fs = require('fs');
 
 // Add a Task to a User
 const addTask = async (req, res) => {
@@ -23,7 +24,19 @@ const getTasks = async (req, res) => {
     if (!user) {
       return res.status(404).send('User not found');
     }
-    res.send(user.tasks);
+
+    const tasksWithBase64Images = user.tasks.map(task => {
+      if (task.image && task.image.data) {
+        // Convert binary data to base64 string
+        task.image = `data:image/png;base64,${task.image.data.toString('base64')}`;
+      } else {
+        // Assign null or a default base64 string for a placeholder image
+        task.image = null;
+      }
+      return task;
+    });
+
+    res.send(tasksWithBase64Images);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -34,9 +47,14 @@ const updateTask = async (req, res) => {
   try {
     const userId = req.params.userId;
     const taskId = req.params.taskId;
-    const taskUpdates = req.body;
+    let taskUpdates = { ...req.body, isDone: req.body.isDone === 'true' }; // Convert isDone string to boolean
 
-    // MongoDB doesn't directly support updating a subdocument by its ID in an array, so we fetch and manually update
+    // multer adds file information in req.file
+    if (req.file) {
+      const imageBuffer = fs.readFileSync(req.file.path); // Here you can use the file path to read the file into a buffer
+      taskUpdates = { ...taskUpdates, image: imageBuffer };
+    }
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send('User not found');
@@ -49,6 +67,7 @@ const updateTask = async (req, res) => {
     await user.save();
     res.send(task);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 };
@@ -70,9 +89,8 @@ const deleteTask = async (req, res) => {
 };
 
 module.exports = {
-    addTask,
-    getTasks,
-    updateTask,
-    deleteTask,
-  };
-  
+  addTask,
+  getTasks,
+  updateTask,
+  deleteTask,
+};
