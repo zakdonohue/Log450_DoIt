@@ -35,7 +35,8 @@ class CoreApp extends State<CoreAppNavigation> {
         final parsedJson = jsonDecode(response.body);
         List<dynamic> listTask = parsedJson["tasks"];
 
-        for (var i = 0; i < listTask.length; i++) {
+        for (var i = 0; i < listTask.length - 1; i++) {
+          print(listTask[i]["isDone"]);
           if (!listTask[i]["isDone"]) {
             numberofTaskNotCompleted += 1;
           }
@@ -45,6 +46,7 @@ class CoreApp extends State<CoreAppNavigation> {
           LocalNotificationService.showNotificationAndroid(
               numberofTaskNotCompleted);
         }
+        numberofTaskNotCompleted = 0;
       } else {
         print("Failed to get user: ${response.body}");
       }
@@ -61,9 +63,9 @@ class CoreApp extends State<CoreAppNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    _GetSettings("6610b7fb661864dc02c472e7");
+    GetSettings(SharedPreferences.shared.userId);
     if (SharedPreferences.shared.isNotificationEnabled) {
-      GetUserTasksNotCompleted("660b4acda50307da74558e81");
+      GetUserTasksNotCompleted(SharedPreferences.shared.userId);
     }
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -128,7 +130,7 @@ class CoreApp extends State<CoreAppNavigation> {
 
 final createMaterialColor = CreateMaterialColor();
 
-Future<void> _GetSettings(String userId) async {
+Future<void> GetSettings(String userId) async {
   String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";
 
   try {

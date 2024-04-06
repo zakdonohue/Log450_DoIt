@@ -39,16 +39,14 @@ class SettingsScreen extends StatelessWidget {
                           Spacer(),
                           CustomSwitchPrivacy(callbackON: () {
                             _EditSettings(
-                              true,
-                              SharedPreferences.shared.isNotificationEnabled,
-                              "6610b7fb661864dc02c472e7",
-                            );
+                                true,
+                                SharedPreferences.shared.isNotificationEnabled,
+                                SharedPreferences.shared.userId);
                           }, callbackOFF: () {
                             _EditSettings(
-                              false,
-                              SharedPreferences.shared.isNotificationEnabled,
-                              "6610b7fb661864dc02c472e7",
-                            );
+                                false,
+                                SharedPreferences.shared.isNotificationEnabled,
+                                SharedPreferences.shared.userId);
                           })
                         ]),
                         Divider(color: Colors.black),
@@ -69,16 +67,15 @@ class SettingsScreen extends StatelessWidget {
                             _EditSettings(
                                 SharedPreferences.shared.isAccountPrivate,
                                 true,
-                                "6610b7fb661864dc02c472e7");
+                                SharedPreferences.shared.userId);
                             CoreAppNavigation.of(context)
                                 .GetUserTasksNotCompleted(
-                                    "660b4acda50307da74558e81");
+                                    SharedPreferences.shared.userId);
                           }, callbackOFF: () {
                             _EditSettings(
-                              SharedPreferences.shared.isAccountPrivate,
-                              false,
-                              "6610b7fb661864dc02c472e7",
-                            );
+                                SharedPreferences.shared.isAccountPrivate,
+                                false,
+                                SharedPreferences.shared.userId);
                           })
                         ]),
                         Divider(color: Colors.black),

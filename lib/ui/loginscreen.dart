@@ -25,44 +25,44 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 120.0),
+              child: Transform.scale(
+                scale: 0.8,
+                child: Image.asset('assets/Logo.png'),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 70.0),
+              child: Column(children: []),
+            ),
+            Expanded(
+              child: Container(
+                width: double.maxFinite,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF0AAAF8),
+                      Color(0xFF85D5FC),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(70.0),
+                  ),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black.withOpacity(0.8),
+                  //     spreadRadius: 10,
+                  //     blurRadius: 20,
+                  //     offset: const Offset(0, 12),
+                  //   ),
+                  // ],
+                ),
+                child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 120.0),
-                      child: Transform.scale(
-                        scale: 0.8,
-                        child: Image.asset('assets/Logo.png'),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 70.0),
-                      child: Column(children: []),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFF0AAAF8),
-                              Color(0xFF85D5FC),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(70.0),
-                          ),
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.black.withOpacity(0.8),
-                          //     spreadRadius: 10,
-                          //     blurRadius: 20,
-                          //     offset: const Offset(0, 12),
-                          //   ),
-                          // ],
-                        ),
-                        child: Column(
-                          children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                       child: Column(
@@ -85,61 +85,69 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                        Padding(
+                          Padding(
                             padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 32.0,
-                          ),
-                          child: TextField(
-                            controller: _usernameController,
-                            decoration: InputDecoration(
-                              hintText: "Entrez votre nom d'utilisateur",
-                              labelText: "Nom d'utilisateur",
-                              labelStyle: const TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0), 
-                                borderSide: const BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0), 
-                                borderSide: const BorderSide(color: Colors.white), 
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                                borderSide: const BorderSide(color: Colors.white), 
-                              ),
+                              vertical: 8.0,
+                              horizontal: 32.0,
                             ),
-                            style: const TextStyle(color: Colors.white), 
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 32.0,
-                          ),
-                          child: TextField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              hintText: "Entrez votre mot de passe",
-                              labelText: "Mot de passe",
-                              labelStyle: const TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                                borderSide: const BorderSide(color: Colors.white), 
+                            child: TextField(
+                              controller: _usernameController,
+                              decoration: InputDecoration(
+                                hintText: "Entrez votre nom d'utilisateur",
+                                labelText: "Nom d'utilisateur",
+                                labelStyle:
+                                    const TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0), 
-                                borderSide: const BorderSide(color: Colors.white),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                                borderSide: const BorderSide(color: Colors.white),
-                              ),
+                              style: const TextStyle(color: Colors.white),
                             ),
-                            style: const TextStyle(color: Colors.white),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                              horizontal: 32.0,
+                            ),
+                            child: TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: "Entrez votre mot de passe",
+                                labelText: "Mot de passe",
+                                labelStyle:
+                                    const TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                              ),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -169,13 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontSize: 21.0,
                                 ),
                               ),
-                              icon: const Icon(Icons.login, color:Color(0xFF0AAAF8)),
+                              icon: const Icon(Icons.login,
+                                  color: Color(0xFF0AAAF8)),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                elevation: 5, // Add elevation (drop shadow) to the button
-                                shadowColor: Colors.black.withOpacity(0.8), // Shadow color
+                                elevation:
+                                    5, // Add elevation (drop shadow) to the button
+                                shadowColor: Colors.black
+                                    .withOpacity(0.8), // Shadow color
                               ),
                             ),
                           ),
@@ -187,13 +198,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             },
                             child: const Text(
-                                "Créer un compte",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                ),
+                              "Créer un compte",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20.0,
                               ),
+                            ),
                           ),
                         ],
                       ),
@@ -221,26 +232,26 @@ class _LoginScreenState extends State<LoginScreen> {
         }),
       );
 
-         if (response.statusCode >= 200 && response.statusCode <= 299) {
-            final responseBody = jsonDecode(response.body);
-            final userId = responseBody['userId'];
-            SharedPreferences.shared.userId = userId;
-            Navigator.pushNamed(context, CoreApp.routeName);
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        final responseBody = jsonDecode(response.body);
+        final userId = responseBody['userId'];
+        SharedPreferences.shared.userId = userId;
+        GetSettings(userId);
+        Navigator.pushNamed(context, CoreApp.routeName);
 
-            print("User authenticated successfully. UserId: $userId");
-          } else if (response.statusCode == 401) {
-            print("Invalid credentials. Please check your username and password.");
+        print("User authenticated successfully. UserId: $userId");
+      } else if (response.statusCode == 401) {
+        print("Invalid credentials. Please check your username and password.");
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("L'identifiant ou le mot de passe sont invalides."),
-                duration: Duration(seconds: 3),
-              ),
-            );
-
-          } else {
-            print("Failed to authenticate. Status code: ${response.statusCode}");
-          }
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("L'identifiant ou le mot de passe sont invalides."),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      } else {
+        print("Failed to authenticate. Status code: ${response.statusCode}");
+      }
     } catch (e) {
       print("Error authenticating user: $e");
     }

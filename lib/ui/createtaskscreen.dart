@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:log450_doit/ui/utils/sharedPreferences.dart';
+
 class CreateTaskScreen extends StatefulWidget {
   static String routeName = '/createTaskScreen';
 
@@ -240,7 +242,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           } else {
             setState(() {
               _isTaskEmpty = false; // Reset the visual cue state
-              _addTask("660b4acda50307da74558e81");
+              _addTask(SharedPreferences.shared.userId);
             });
           }
         },
@@ -249,8 +251,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           color: Colors.white,
           size: 30,
         ),
-        label:
-            const Text('Save', style: TextStyle(color: Colors.white, fontSize: 25)),
+        label: const Text('Save',
+            style: TextStyle(color: Colors.white, fontSize: 25)),
         backgroundColor: Colors.deepPurple,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(40.0)),
