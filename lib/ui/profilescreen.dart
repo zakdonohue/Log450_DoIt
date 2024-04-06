@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:log450_doit/ui/reusableWidgets/camera.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -97,7 +98,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: Colors.white
                                   ),
                                 onPressed: () {
-                                  // Handle camera icon press for this task
+                                  print(task.toString());
+                                  openCameraAndSavePhoto(SharedPreferences.shared.userId, task["_id"]);
                                 },
                               ),
                             ),

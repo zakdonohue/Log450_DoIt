@@ -48,17 +48,22 @@ class _HomeScreenState extends State<HomeScreen> {
             List<dynamic> tasks = jsonDecode(responseTasks.body);
             
             for (var task in tasks) {
-              String nameOfTask = task['title'];
+              String? imageBase64;
+              if (task['isDone'] == true && task['image'] != null) {
+                List<int> imageData = List<int>.from(task['image']['data']);
+                imageBase64 = base64Encode(imageData);
+              
 
-              Map<String, String> post = {
-                'image': 'assets/partyimage.jpg', //TODO: Change 'image' for real name of field
-                'nameOfPostUser': friendName,
-                'nameOfTask': task['title'],
-              };
+                Map<String, String> post = {
+                  'image': imageBase64, 
+                  'nameOfPostUser': friendName,
+                  'nameOfTask': task['title'],
+                };
 
-              setState(() {
-                posts.add(post);
-              });
+                setState(() {
+                  posts.add(post);
+                });
+                }
             }
           } else {
             print("Failed to get tasks for friend $friendId: ${responseTasks.body}");
@@ -98,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (BuildContext context, int index) {
               var post = posts[index];
               return PostItem(
-                imagePath: post['image']!,
+                imageBase64: post['image']!,
                 nameOfPostUser: post['nameOfPostUser']!,
                 nameOfTask: post['nameOfTask']!,
               );

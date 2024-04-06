@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'camera.dart';
 
 class PostItem extends StatefulWidget {
-  final String imagePath;
+  final String imageBase64;
   final String nameOfPostUser;
   final String nameOfTask;
 
   const PostItem({
     super.key,
-    required this.imagePath,
+    required this.imageBase64,
     required this.nameOfPostUser,
     required this.nameOfTask,
   });
@@ -42,11 +45,15 @@ class _PostItemState extends State<PostItem> {
               Stack(
                 alignment: Alignment.bottomLeft,
                 children: [
-                  Image.asset(
-                    widget.imagePath,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  widget.imageBase64.isNotEmpty
+                      ? Image.memory(
+                          base64Decode(widget.imageBase64),
+                          width: double.infinity, // Adjusted to fill the width
+                          height: 200, // Arbitrary height, adjust as needed
+                          fit: BoxFit.cover,
+                        )
+                      : const Icon(Icons.task,
+                          size: 50), // Example fallback icon with size
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -84,7 +91,9 @@ class _PostItemState extends State<PostItem> {
                         _isLiked ? Icons.favorite : Icons.favorite_border,
                         color: Colors.red,
                       ),
-                      onPressed: _toggleLike,
+                      onPressed: () {
+                        _toggleLike();
+                      },
                     ),
                   ],
                 ),
