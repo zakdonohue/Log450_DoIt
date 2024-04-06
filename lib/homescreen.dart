@@ -1,22 +1,64 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/reusableWidgets/postItem.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  static String routeName = '/home';
+
   const HomeScreen({super.key});
 
-  static const routeName = '/home';
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _taskController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    String currentUserId = '';
+    _getTasksOfFriends(currentUserId);
+  }
+
+  Future<void> _getTasksOfFriends(String userId) async {
+    final String friendsUrl = "http://10.0.2.2:3000/users/$userId/friends";
+    List<dynamic> friends = [];
+
+    try {
+      final responseFriends = await http.get(Uri.parse(friendsUrl), headers: {"Content-Type": "application/json"});
+      if (responseFriends.statusCode == 200) {
+        friends = jsonDecode(responseFriends.body);
+
+        for (var friend in friends) {
+          String friendId = friend['friend_user_id'];
+          print('Friend Id $friendId: $friendId');
+          final String tasksUrl = "http://10.0.2.2:3000/users/$friendId/tasks";
+
+          // Fetch tasks for each friend
+          final responseTasks = await http.get(Uri.parse(tasksUrl), headers: {"Content-Type": "application/json"});
+          if (responseTasks.statusCode == 200) {
+            List<dynamic> tasks = jsonDecode(responseTasks.body);
+            print('Tasks for friend $friendId: $tasks');
+          } else {
+            print("Failed to get tasks for friend $friendId: ${responseTasks.body}");
+          }
+        }
+      } else {
+        print("Failed to get friends: ${responseFriends.body}");
+      }
+    } catch (e) {
+      print("Error fetching data: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-        backgroundColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(197, 167, 17, 17)),
-        body: Card(
-            shadowColor: Colors.transparent,
-            margin: const EdgeInsets.all(8.0),
-            child: SizedBox.expand(
+        body:SizedBox.expand(
                 child: Center(
                     child:
                         // TODO Populate with actual data from BD
@@ -40,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       imagePath: "assets/paddleboard.jpg",
                       nameOfPostUser: "la fomme du dep",
                       nameOfTask: "fa bo fa chaud a 7h00 AM"),
-                ])))));
+                ]))));
   }
 }
 
