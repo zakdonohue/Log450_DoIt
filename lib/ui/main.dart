@@ -30,6 +30,7 @@ class _MainApp extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        LoginScreen.routeName: (context) => const LoginScreen(),
         CreateAccountScreen.routeName: (context) => const CreateAccountScreen(),
         CoreApp.routeName: (context) => const CoreAppNavigation(),
         ProfileScreen.routeName: (context) => const ProfileScreen(),
