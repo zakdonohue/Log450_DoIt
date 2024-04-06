@@ -236,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final responseBody = jsonDecode(response.body);
         final userId = responseBody['userId'];
         SharedPreferences.shared.userId = userId;
-        GetSettings(userId);
+
         Navigator.pushNamed(context, CoreApp.routeName);
 
         print("User authenticated successfully. UserId: $userId");
