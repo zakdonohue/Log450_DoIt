@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:log450_doit/ui/main.dart';
 import 'package:log450_doit/ui/reusableWidgets/customswitch.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 
@@ -19,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 40.0),
           child: Column(children: [
             Text('Settings page', style: theme.textTheme.titleLarge),
-            const Card(
+            Card(
                 shadowColor: Colors.transparent,
                 margin: EdgeInsets.all(8.0),
                 child: Wrap(children: [
@@ -30,25 +31,23 @@ class SettingsScreen extends StatelessWidget {
                         Row(children: [
                           Text("Profile Prive"),
                           Spacer(),
-                          CustomSwitch()
+                          //    CustomSwitch()
                         ]),
                         Divider(color: Colors.black),
                         Row(children: [
                           Text("Theme Fonce"),
                           Spacer(),
-                          CustomSwitch()
+                          CustomSwitch(callbackON: () {
+                            MainApp.of(context).changeTheme(ThemeMode.dark);
+                          }, callbackOFF: () {
+                            MainApp.of(context).changeTheme(ThemeMode.light);
+                          })
                         ]),
                         Divider(color: Colors.black),
                         Row(children: [
                           Text("Rappel automatique"),
                           Spacer(),
-                          CustomSwitch()
-                        ]),
-                        Divider(color: Colors.black),
-                        Row(children: [
-                          Text("Tutoriel personalise"),
-                          Spacer(),
-                          CustomSwitch()
+                          //CustomSwitch()
                         ]),
                         Divider(color: Colors.black),
                       ]),
@@ -61,21 +60,3 @@ class SettingsScreen extends StatelessWidget {
 }
 
 final createMaterialColor = CreateMaterialColor();
-
-//TODO implement dark theme
-    // final ThemeData themeData = ThemeData(
-    //     useMaterial3: true,
-    //     brightness: isDark ? Brightness.dark : Brightness.light);
-    //  Tooltip(
-    //         message: 'Change brightness mode',
-    //         child: IconButton(
-    //           isSelected: isDark,
-    //           onPressed: () {
-    //             setState(() {
-    //               isDark = !isDark;
-    //             });
-    //           },
-    //           icon: const Icon(Icons.wb_sunny_outlined),
-    //           selectedIcon: const Icon(Icons.brightness_2_outlined),
-    //         ),
-    //       )

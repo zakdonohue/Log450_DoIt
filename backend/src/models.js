@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 
 // Settings Schema
 const settingsSchema = new Schema({
-  theme: String,
   privacy_level: String,
   notifications_enabled: Boolean,
 });
@@ -23,8 +22,8 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password_hash: { type: String, required: true },
-  surname: String,
-  lastName: String,
+  surname: String ?,
+  lastName: String ?,
   city: String ?,
   province: String ?,
   country: String ?,
