@@ -110,7 +110,7 @@ class CoreApp extends State<CoreAppNavigation> {
   Widget _buildNavItem(IconData icon, String label, int index) {
     Color iconColor = currentPageIndex == index
         ? Colors.blue
-        : Colors.grey; // Adjust colors as needed
+        : Colors.grey;
     return InkWell(
       onTap: () {
         setState(() {
