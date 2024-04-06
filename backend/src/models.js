@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // Settings Schema
 const settingsSchema = new Schema({
-  privacy_level: String,
+  is_account_private: Boolean,
   notifications_enabled: Boolean,
 });
 
@@ -22,11 +22,11 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password_hash: { type: String, required: true },
-  surname: String ?,
-  lastName: String ?,
-  city: String ?,
-  province: String ?,
-  country: String ?,
+  surname: String,
+  lastName: String,
+  city: String,
+  province: String,
+  country: String,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   settings: settingsSchema, // Use settings schema here

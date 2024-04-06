@@ -25,6 +25,7 @@ class MainApp extends StatefulWidget {
 
 class _MainApp extends State<MainApp> {
   ThemeMode _themeMode = ThemeMode.system;
+  bool isDarkMode = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

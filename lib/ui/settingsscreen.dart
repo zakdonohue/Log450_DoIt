@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/main.dart';
-import 'package:log450_doit/ui/reusableWidgets/customswitch.dart';
+import 'package:log450_doit/ui/reusableWidgets/customswitchprivacy.dart';
+import 'package:log450_doit/ui/reusableWidgets/customswitchtheme.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
+import 'package:log450_doit/ui/utils/sharedPreferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -11,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
+    bool isDarkMode = false;
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(198, 78, 97, 161)),
@@ -31,13 +35,25 @@ class SettingsScreen extends StatelessWidget {
                         Row(children: [
                           Text("Profile Prive"),
                           Spacer(),
-                          //    CustomSwitch()
+                          CustomSwitchPrivacy(callbackON: () {
+                            _EditPrivacy(
+                              true,
+                              false,
+                              "6610b7fb661864dc02c472e7",
+                            );
+                          }, callbackOFF: () {
+                            _EditPrivacy(
+                              false,
+                              false,
+                              "6610b7fb661864dc02c472e7",
+                            );
+                          })
                         ]),
                         Divider(color: Colors.black),
                         Row(children: [
                           Text("Theme Fonce"),
                           Spacer(),
-                          CustomSwitch(callbackON: () {
+                          CustomSwitchTheme(callbackON: () {
                             MainApp.of(context).changeTheme(ThemeMode.dark);
                           }, callbackOFF: () {
                             MainApp.of(context).changeTheme(ThemeMode.light);
@@ -47,7 +63,16 @@ class SettingsScreen extends StatelessWidget {
                         Row(children: [
                           Text("Rappel automatique"),
                           Spacer(),
-                          //CustomSwitch()
+                          CustomSwitchPrivacy(callbackON: () {
+                            _EditPrivacy(
+                                false, true, "6610b7fb661864dc02c472e7");
+                          }, callbackOFF: () {
+                            _EditPrivacy(
+                              false,
+                              false,
+                              "6610b7fb661864dc02c472e7",
+                            );
+                          })
                         ]),
                         Divider(color: Colors.black),
                       ]),
@@ -56,6 +81,30 @@ class SettingsScreen extends StatelessWidget {
                 ]))
           ]),
         )));
+  }
+}
+
+Future<void> _EditPrivacy(
+    bool? isAccountPrivate, bool? isNotifEnabled, String userId) async {
+  String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";
+
+  try {
+    final response = await http.patch(
+      Uri.parse(apiUrl),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "is_account_private": isAccountPrivate,
+        "notifications_enabled": isNotifEnabled
+      }),
+    );
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      print("Settings updated successfully");
+    } else {
+      print("Failed to update settings: ${response.body}");
+    }
+  } catch (e) {
+    print("Error update settings: $e");
   }
 }
 

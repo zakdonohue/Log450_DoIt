@@ -172,10 +172,14 @@ Future<void> _CreateUser(
         "city": controllerCity?.text,
         "province": controllerProvince?.text,
         "country": controllerCountry?.text,
+        "settings": {
+          "is_account_private": false,
+          "notifications_enabled": false
+        }
       }),
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
       print("User created successfully");
     } else {
       print("Failed to create user: ${response.body}");
