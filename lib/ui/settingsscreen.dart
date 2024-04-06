@@ -12,7 +12,6 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   static const routeName = '/parameters';
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
