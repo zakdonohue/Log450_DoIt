@@ -6,16 +6,67 @@ import 'package:log450_doit/ui/createtaskscreen.dart';
 import 'package:log450_doit/ui/managefriends.dart';
 import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/settingsscreen.dart';
+import 'package:log450_doit/ui/utils/localnotifservice.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
+
+class CoreAppNavigation extends StatefulWidget {
+  const CoreAppNavigation({super.key});
+
+  @override
+  State<CoreAppNavigation> createState() => CoreApp();
+  static CoreApp of(BuildContext context) =>
+      context.findAncestorStateOfType<CoreApp>()!;
+}
 
 class CoreApp extends State<CoreAppNavigation> {
   static const routeName = '/corenav';
   int currentPageIndex = 0;
 
+  Future<void> GetUserTasksNotCompleted(String userId) async {
+    String apiUrl = "http://10.0.2.2:3000/users/$userId";
+    int numberofTaskNotCompleted = 0;
+    try {
+      final response = await http.get(Uri.parse(apiUrl),
+          headers: {"Content-Type": "application/json"});
+
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        print("get user successfully");
+        final parsedJson = jsonDecode(response.body);
+        List<dynamic> listTask = parsedJson["tasks"];
+
+        for (var i = 0; i < listTask.length; i++) {
+          print(listTask[i]["isDone"]);
+          if (!listTask[i]["isDone"]) {
+            numberofTaskNotCompleted += 1;
+          }
+        }
+
+        if (numberofTaskNotCompleted > 0) {
+          LocalNotificationService.showNotificationAndroid(
+              numberofTaskNotCompleted);
+        }
+        numberofTaskNotCompleted = 0;
+      } else {
+        print("Failed to get user: ${response.body}");
+      }
+    } catch (e) {
+      print("Error get user: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    LocalNotificationService().init();
+  }
+
   @override
   Widget build(BuildContext context) {
-    _GetSettings("6610b7fb661864dc02c472e7");
+    GetSettings(SharedPreferences.shared.userId);
+    if (SharedPreferences.shared.isNotificationEnabled) {
+      GetUserTasksNotCompleted(SharedPreferences.shared.userId);
+    }
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
@@ -56,9 +107,7 @@ class CoreApp extends State<CoreAppNavigation> {
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {
-    Color iconColor = currentPageIndex == index
-        ? Colors.blue
-        : Colors.grey;
+    Color iconColor = currentPageIndex == index ? Colors.blue : Colors.grey;
     return InkWell(
       onTap: () {
         setState(() {
@@ -78,14 +127,7 @@ class CoreApp extends State<CoreAppNavigation> {
 
 final createMaterialColor = CreateMaterialColor();
 
-class CoreAppNavigation extends StatefulWidget {
-  const CoreAppNavigation({super.key});
-
-  @override
-  State<CoreAppNavigation> createState() => CoreApp();
-}
-
-Future<void> _GetSettings(String userId) async {
+Future<void> GetSettings(String userId) async {
   String apiUrl = "http://10.0.2.2:3000/users/$userId/settings";
 
   try {

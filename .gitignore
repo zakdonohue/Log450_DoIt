@@ -11,6 +11,7 @@
 migrate_working_dir/
 *node_modules
 *.env
+*/uploads
 
 # IntelliJ related
 *.iml
