@@ -160,8 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 80,
-                            width: 300,
+                            height: 70,
+                            width: 260,
                             child: ElevatedButton.icon(
                               onPressed: () {
                                 _authUser(

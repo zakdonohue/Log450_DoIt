@@ -4,7 +4,7 @@ const { User } = require('../models');
 const addFriend = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const friendId = req.body.friendId; // ID of the user to be added as a friend
+    const friendId = req.params.friendId; // ID of the user to be added as a friend
     // Ensure both users exist
     const user = await User.findById(userId);
     const friend = await User.findById(friendId);

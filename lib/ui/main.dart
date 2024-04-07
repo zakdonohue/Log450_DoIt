@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/homescreen.dart';
+import 'package:log450_doit/ui/addfriends.dart';
 import 'package:log450_doit/ui/createtaskscreen.dart';
 import 'package:log450_doit/ui/loaderscreen.dart';
 import 'package:log450_doit/ui/managefriends.dart';
@@ -9,6 +10,7 @@ import 'package:log450_doit/ui/profilescreen.dart';
 import 'package:log450_doit/ui/createaccountscreen.dart';
 import 'package:log450_doit/ui/corenav.dart';
 import 'package:log450_doit/ui/loginscreen.dart';
+import 'package:log450_doit/ui/addfriends.dart';
 
 void main() {
   runApp(const MainApp());
@@ -39,7 +41,8 @@ class _MainApp extends State<MainApp> {
         ManageFriendsScreen.routeName: (context) => const ManageFriendsScreen(),
         SettingsScreen.routeName: (context) => const SettingsScreen(),
         LoaderScreen.routeName: (context) => const LoaderScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen()
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        AddFriendsScreen.routeName: (context) => const AddFriendsScreen()
       },
       title: "Do It",
       home: const LoginScreen(),

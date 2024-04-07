@@ -41,7 +41,7 @@ router.post('/users/:userId/tasks/:taskId', upload.single('image'), userTasksCon
 router.delete('/users/:userId/tasks/:taskId', userTasksController.deleteTask);
 
 // Friend Routes
-router.post('/users/:userId/friends', friendsController.addFriend);
+router.post('/users/:userId/friends/:friendId', friendsController.addFriend);
 router.get('/users/:userId/friends', friendsController.getFriends);
 router.delete('/users/:userId/friends/:friendId', friendsController.removeFriend);
 

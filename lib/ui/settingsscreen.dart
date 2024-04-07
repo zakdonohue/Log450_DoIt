@@ -20,12 +20,18 @@ class SettingsScreen extends StatelessWidget {
     bool isDarkMode = false;
     return Scaffold(
         backgroundColor: createMaterialColor
-            .createMaterialColor(const Color.fromARGB(198, 78, 97, 161)),
+            .createMaterialColor(const Color.fromARGB(255, 65, 180, 238)),
         body: Center(
             child: Padding(
-          padding: const EdgeInsets.only(top: 40.0),
+          padding: const EdgeInsets.only(top: 60.0),
           child: Column(children: [
-            Text('Settings page', style: theme.textTheme.titleLarge),
+            const Text(
+              'Réglages', 
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 40.0,
+                )),
             Card(
                 shadowColor: Colors.transparent,
                 margin: EdgeInsets.all(8.0),
@@ -35,7 +41,11 @@ class SettingsScreen extends StatelessWidget {
                       padding: EdgeInsets.all(16.0),
                       child: Column(children: [
                         Row(children: [
-                          Text("Profile Prive"),
+                          const Text("Profil Privé",
+                            style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 21.0,
+                          )),
                           Spacer(),
                           CustomSwitchPrivacy(callbackON: () {
                             _EditSettings(
@@ -51,7 +61,11 @@ class SettingsScreen extends StatelessWidget {
                         ]),
                         Divider(color: Colors.black),
                         Row(children: [
-                          Text("Theme Fonce"),
+                          const Text("Thème Foncé",
+                            style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 21.0,
+                          )),
                           Spacer(),
                           CustomSwitchTheme(callbackON: () {
                             MainApp.of(context).changeTheme(ThemeMode.dark);
@@ -61,7 +75,11 @@ class SettingsScreen extends StatelessWidget {
                         ]),
                         Divider(color: Colors.black),
                         Row(children: [
-                          Text("Rappel automatique"),
+                          const Text("Rappel automatique",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 21.0,
+                          )),
                           Spacer(),
                           CustomSwitchNotification(callbackON: () {
                             _EditSettings(
