@@ -27,18 +27,16 @@ class CoreApp extends State<CoreAppNavigation> {
             _buildNavItem(Icons.home_outlined, "Actualité", 0),
             _buildNavItem(Icons.task_outlined, "Taches", 1),
             SizedBox(width: 48),
-            _buildNavItem(Icons.people_alt_outlined, "Amis", 2),
-            _buildNavItem(Icons.settings_outlined, "Réglages", 3),
+            _buildNavItem(Icons.people_alt_outlined, "Amis", 3),
+            _buildNavItem(Icons.settings_outlined, "Réglages", 4),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const CreateTaskScreen(),
-            ),
-          );
+          setState(() {
+            currentPageIndex = 2;
+          });
         },
         child: const Icon(Icons.add),
         backgroundColor: Color(0xFF0AAAF8),
@@ -49,6 +47,7 @@ class CoreApp extends State<CoreAppNavigation> {
         children: const <Widget>[
           HomeScreen(),
           ProfileScreen(),
+          CreateTaskScreen(),
           ManageFriendsScreen(),
           SettingsScreen(),
         ],
