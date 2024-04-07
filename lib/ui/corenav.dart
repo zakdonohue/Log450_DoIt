@@ -35,7 +35,7 @@ class CoreApp extends State<CoreAppNavigation> {
         final parsedJson = jsonDecode(response.body);
         List<dynamic> listTask = parsedJson["tasks"];
 
-        for (var i = 0; i < listTask.length - 1; i++) {
+        for (var i = 0; i < listTask.length; i++) {
           print(listTask[i]["isDone"]);
           if (!listTask[i]["isDone"]) {
             numberofTaskNotCompleted += 1;
@@ -108,9 +108,7 @@ class CoreApp extends State<CoreAppNavigation> {
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {
-    Color iconColor = currentPageIndex == index
-        ? Colors.blue
-        : Colors.grey;
+    Color iconColor = currentPageIndex == index ? Colors.blue : Colors.grey;
     return InkWell(
       onTap: () {
         setState(() {
