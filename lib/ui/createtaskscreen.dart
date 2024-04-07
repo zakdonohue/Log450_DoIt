@@ -245,11 +245,12 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                       const SizedBox(
                         height: 30,
                       ),
+                      if (!_taskAddedSuccessfully)
                       const SizedBox(height: 60),
                       if (_taskAddedSuccessfully)
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                              vertical: 10.0, horizontal: 30.0),
                           child: Container(
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
