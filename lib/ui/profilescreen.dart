@@ -38,9 +38,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> deleteTask(String taskId) async {
+    try {
+      final response = await http.delete(Uri.parse('http://10.0.2.2:3000/users/$userId/tasks/$taskId'));
+      if (response.statusCode == 200) {
+        setState(() {
+          tasks.removeWhere((task) => task['_id'] == taskId);
+        });
+      } else {
+        throw Exception('Failed to delete task');
+      }
+    } catch (error) {
+      print('Error deleting task: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int incompleteTaskCount = tasks.where((task) => task['isDone'] == false).length;
+    int incompleteTaskCount = tasks.where((task) => !task['isDone']).length;
 
     return Scaffold(
       body: Column(
@@ -48,18 +63,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           const SizedBox(height: 80),
           const Text(
-            'TÂCHES',
+            'TASKS',
             style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.blue),
           ),
           const SizedBox(height: 16),
           Text(
-            'Vous avez $incompleteTaskCount taches à completer',
+            'You have $incompleteTaskCount tasks to complete',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
           tasks.isEmpty
               ? const Center(
-                  child: Text("Vous n'avez aucunes taches."),
+                  child: Text("You don't have any tasks."),
                 )
               : Expanded(
                   child: ListView(
@@ -74,10 +89,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Container(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [
-                                  task['isDone'] == true ? Color.fromARGB(255, 102, 241, 126) : const Color.fromARGB(255, 65, 180, 238),
-                                  task['isDone'] == true ? Color.fromARGB(255, 14, 204, 46) : const Color.fromARGB(255, 54, 155, 206),
-                                ],
+                                colors: task['isDone']
+                                    ? [Color.fromARGB(255, 102, 241, 126), Color.fromARGB(255, 14, 204, 46)]
+                                    : [Color.fromARGB(255, 65, 180, 238), Color.fromARGB(255, 54, 155, 206)],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
@@ -92,16 +106,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              trailing: IconButton(
-                                icon: Icon(
-                                  task['isDone'] == true ? Icons.check : Icons.camera_alt, 
-                                  color: Colors.white
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      task['isDone'] ? Icons.check : Icons.camera_alt,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () async {
+                                      print(task.toString());
+                                      await openCameraAndSavePhoto(SharedPreferences.shared.userId, task['_id']);
+                                      await _fetchUserTasks();
+                                    },
                                   ),
-                                onPressed: () async {
-                                  print(task.toString());
-                                  await openCameraAndSavePhoto(SharedPreferences.shared.userId, task["_id"]);
-                                  await _fetchUserTasks();
-                                },
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('Supprimer tache'),
+                                            content: Text('Etes-vous certain de vouloir supprimer cette tache?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                  deleteTask(task['_id']);
+                                                },
+                                                child: Text('Delete'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ),
