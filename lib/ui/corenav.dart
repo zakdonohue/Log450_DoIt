@@ -10,6 +10,8 @@ import 'package:log450_doit/ui/utils/localnotifservice.dart';
 import 'package:log450_doit/ui/utils/materialColor.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
+GlobalKey<ProfileScreenState> profileScreenKey = GlobalKey<ProfileScreenState>();
+
 class CoreAppNavigation extends StatefulWidget {
   const CoreAppNavigation({super.key});
 
@@ -95,12 +97,12 @@ class CoreApp extends State<CoreAppNavigation> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: IndexedStack(
         index: currentPageIndex,
-        children: const <Widget>[
-          HomeScreen(),
-          ProfileScreen(),
-          CreateTaskScreen(),
-          ManageFriendsScreen(),
-          SettingsScreen(),
+        children: <Widget>[
+          const HomeScreen(),
+          ProfileScreen(key: profileScreenKey),
+          const CreateTaskScreen(),
+          const ManageFriendsScreen(),
+          const SettingsScreen(),
         ],
       ),
     );
@@ -113,6 +115,10 @@ class CoreApp extends State<CoreAppNavigation> {
         setState(() {
           currentPageIndex = index;
         });
+        print(index);
+        if (index == 1) {
+          profileScreenKey.currentState?.fetchUserTasks();
+        }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,

@@ -5,31 +5,35 @@ import 'package:log450_doit/ui/reusableWidgets/camera.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final Function? onTabSelected;
+
+  const ProfileScreen({Key? key, this.onTabSelected}) : super(key: key);
 
   static const routeName = '/profile';
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  ProfileScreenState createState() => ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
   late String userId = SharedPreferences.shared.userId;
   List<dynamic> tasks = [];
 
   @override
   void initState() {
     super.initState();
-    _fetchUserTasks();
+    fetchUserTasks();
+    widget.onTabSelected?.call();
   }
 
-  Future<void> _fetchUserTasks() async {
+  Future<void> fetchUserTasks() async {
     try {
       final response = await http.get(Uri.parse('http://10.0.2.2:3000/users/$userId/tasks'));
       if (response.statusCode == 200) {
         setState(() {
           tasks = jsonDecode(response.body);
         });
+        print("fetched UsersTasks.");
       } else {
         throw Exception('Failed to load tasks');
       }
@@ -117,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     onPressed: () async {
                                       print(task.toString());
                                       await openCameraAndSavePhoto(SharedPreferences.shared.userId, task['_id']);
-                                      await _fetchUserTasks();
+                                      await fetchUserTasks();
                                     },
                                   ),
                                   IconButton(
