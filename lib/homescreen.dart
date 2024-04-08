@@ -46,12 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
             final String tasksUrl =
                 "http://10.0.2.2:3000/users/$friendId/tasks";
-            final responseTasks = await http.post(Uri.parse(tasksUrl),
+            final responseTasks = await http.get(Uri.parse(tasksUrl),
                 headers: {"Content-Type": "application/json"});
 
                 print(responseTasks.body);
 
-            if (responseTasks.statusCode == 201) {
+            if (responseTasks.statusCode == 200) {
               List<dynamic> tasks = jsonDecode(responseTasks.body);
 
               for (var task in tasks) {

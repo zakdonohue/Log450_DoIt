@@ -25,18 +25,7 @@ const getTasks = async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    const tasksWithBase64Images = user.tasks.map(task => {
-      if (task.image && task.image.data) {
-        // Convert binary data to base64 string
-        task.image = `data:image/png;base64,${task.image.data.toString('base64')}`;
-      } else {
-        // Assign null or a default base64 string for a placeholder image
-        task.image = null;
-      }
-      return task;
-    });
-
-    res.send(tasksWithBase64Images);
+    res.send(user.tasks);
   } catch (error) {
     res.status(500).send(error);
   }
