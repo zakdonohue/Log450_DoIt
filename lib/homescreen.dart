@@ -87,40 +87,63 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    if (posts.isEmpty) {
-      return const Scaffold(
-        body: Center(
+ @override
+Widget build(BuildContext context) {
+  final ThemeData theme = Theme.of(context);
+
+  if (posts.isEmpty) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "Vous n'avez aucune actualité. \n Ajoutez plus d'amis!",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+    );
+  }
+
+  return Scaffold(
+    body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(height: 40),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text(
-            "Vous n'avez aucune actualité. \n Ajoutez plus d'amis!",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18),
+            "Actualité",
+            style: TextStyle(
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
+            ),
           ),
         ),
-      );
-    }
-
-    return Scaffold(
-      body: SizedBox.expand(
-        child: Center(
+        Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: posts.length,
             itemBuilder: (BuildContext context, int index) {
               var post = posts[index];
-              return PostItem(
-                imageBase64: post['image']!,
-                nameOfPostUser: post['nameOfPostUser']!,
-                nameOfTask: post['nameOfTask']!,
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: PostItem(
+                  imageBase64: post['image']!,
+                  nameOfPostUser: post['nameOfPostUser']!,
+                  nameOfTask: post['nameOfTask']!,
+                ),
               );
             },
           ),
         ),
-      ),
-    );
-  }
+      ],
+    ),
+  );
+}
 }
 
 final createMaterialColor = CreateMaterialColor();

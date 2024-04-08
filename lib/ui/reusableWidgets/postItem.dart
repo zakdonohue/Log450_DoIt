@@ -33,6 +33,7 @@ class _PostItemState extends State<PostItem> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       child: Card(
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
@@ -57,7 +58,7 @@ class _PostItemState extends State<PostItem> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      widget.nameOfPostUser,
+                      "@${widget.nameOfPostUser}",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -82,7 +83,7 @@ class _PostItemState extends State<PostItem> {
                     Expanded(
                       child: Text(
                         widget.nameOfTask,
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
