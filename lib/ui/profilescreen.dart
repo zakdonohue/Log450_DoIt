@@ -5,9 +5,7 @@ import 'package:log450_doit/ui/reusableWidgets/camera.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final Function? onTabSelected;
-
-  const ProfileScreen({Key? key, this.onTabSelected}) : super(key: key);
+  const ProfileScreen({super.key});
 
   static const routeName = '/profile';
 
@@ -23,7 +21,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     fetchUserTasks();
-    widget.onTabSelected?.call();
   }
 
   Future<void> fetchUserTasks() async {

@@ -11,6 +11,7 @@ import 'package:log450_doit/ui/utils/materialColor.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 GlobalKey<ProfileScreenState> profileScreenKey = GlobalKey<ProfileScreenState>();
+GlobalKey<ManageFriendsScreenState> manageFriendScreenKey = GlobalKey<ManageFriendsScreenState>();
 
 class CoreAppNavigation extends StatefulWidget {
   const CoreAppNavigation({super.key});
@@ -101,7 +102,7 @@ class CoreApp extends State<CoreAppNavigation> {
           const HomeScreen(),
           ProfileScreen(key: profileScreenKey),
           const CreateTaskScreen(),
-          const ManageFriendsScreen(),
+          ManageFriendsScreen(key: manageFriendScreenKey),
           const SettingsScreen(),
         ],
       ),
@@ -118,6 +119,9 @@ class CoreApp extends State<CoreAppNavigation> {
         print(index);
         if (index == 1) {
           profileScreenKey.currentState?.fetchUserTasks();
+        }
+        if (index == 3) {
+          manageFriendScreenKey.currentState?.fetchUserFriends();
         }
       },
       child: Column(
