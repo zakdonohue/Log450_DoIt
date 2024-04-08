@@ -17,7 +17,16 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
+    Future<void> _logout(BuildContext context) async {
+      // Clear SharedPreferences
+      SharedPreferences.shared.userId = "";
+
+      // Navigate to Login Screen
+      Navigator.of(context).pushNamed('/login');
+    }
+
     bool isDarkMode = false;
+
     return Scaffold(
         backgroundColor: createMaterialColor
             .createMaterialColor(const Color.fromARGB(255, 65, 180, 238)),
@@ -97,6 +106,14 @@ class SettingsScreen extends StatelessWidget {
                           })
                         ]),
                         Divider(color: Colors.black),
+                        TextButton.icon(
+                          onPressed: () => _logout(context),
+                          icon: Icon(Icons.logout, color: Colors.black),
+                          label: Text(
+                            'Logout',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
                       ]),
                     ),
                   )
