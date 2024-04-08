@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:log450_doit/ui/corenav.dart';
-import 'package:log450_doit/ui/main.dart';
+import 'package:log450_doit/main.dart';
 import 'package:log450_doit/ui/reusableWidgets/customswitchnotif.dart';
 import 'package:log450_doit/ui/reusableWidgets/customswitchprivacy.dart';
 import 'package:log450_doit/ui/reusableWidgets/customswitchtheme.dart';

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:log450_doit/ui/corenav.dart';
-import 'package:log450_doit/ui/main.dart';
 import 'package:log450_doit/ui/utils/sharedPreferences.dart';
 
 class CustomSwitchPrivacy extends StatefulWidget {
