@@ -28,6 +28,8 @@ Nous allons utiliser la base de données Firebase afin de stocker les informatio
 ![image](https://github.com/user-attachments/assets/ac1a5de8-16bd-4956-abbc-c4e86a184296)
 ![image](https://github.com/user-attachments/assets/13d81289-84c1-4e3f-94ed-f9c595444414)
 
+Présentation du projet : https://docs.google.com/presentation/d/1eemdPVqfuUkYpnA0NHMFPy9FAjKGDMZn9mYUG-d5wtY/edit?usp=sharing 
+
 
 
 
